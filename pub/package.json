@@ -1,0 +1,31 @@
+{
+  "author": "Corno",
+  "bin": {},
+  "dependencies": {
+    "api-astn-handlers": "^0.0.0",
+    "api-astn-typedhandlers": "^0.0.0",
+    "lib-pareto-lang": "^0.0.0",
+    "pareto-core-lib": "^0.4.0",
+    "pareto-core-resolve": "^0.14.0"
+  },
+  "files": [
+    "dist",
+    "data"
+  ],
+  "keywords": [],
+  "main": "./dist/index.js",
+  "bugs": {
+    "url": "https://github.com/corno/astn/issues"
+  },
+  "description": "",
+  "homepage": "https://github.com/corno/astn#readme",
+  "license": "ISC",
+  "name": "astn-mrshlschema-lib",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corno/astn-mrhslschema.git"
+  },
+  "types": "dist/index.d.ts",
+  "version": "0.22.0",
+  "content-fingerprint": "9f4de4d2054f9ed3ebd4bbe2f9c43b14640ae422"
+}
