@@ -4,14 +4,14 @@ import * as pl from "pareto-core-lib"
 import * as api from "../../interface"
 import * as pra from "pareto-resolve-lib"
 
-export function convertToASTNSchema<Annotation>(
-    schema: api.Schema<Annotation>,
-    x: pra.ResolveRegistry<Annotation>,
+export function convertToASTNSchema<PAnnotation>(
+    schema: api.Schema<PAnnotation>,
+    x: pra.ResolveRegistry<PAnnotation>,
 ): astn.Schema {
 
     function convertToASTNSchemaValue(
-        node: api.Node<Annotation>, componentTypes: pt.Lookup<astn.TypeDefinition>,
-        keyProperty: null | api.Property<Annotation>,
+        node: api.Node<PAnnotation>, componentTypes: pt.Lookup<astn.TypeDefinition>,
+        keyProperty: null | api.Property<PAnnotation>,
     ): astn.ValueDefinition {
         const properties = pl.createDictionaryBuilder<astn.PropertyDefinition>()
         node.properties.forEach(() => false, (prop, key) => {

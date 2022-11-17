@@ -44,8 +44,8 @@ function buildDictionaryWithNamespaces<T>(
     return out
 }
 
-export function generateCode2<Annotation>(
-    schema: api.Schema<Annotation>,
+export function generateCode2<PAnnotation>(
+    schema: api.Schema<PAnnotation>,
     callback: ($: t.__root_B) => void,
 ): void {
     callback({
@@ -54,17 +54,17 @@ export function generateCode2<Annotation>(
                 "types": {
                     "boolean": {
                         "type": {
-                            "type": ["boolean", {}],
+                            "type": ["boolean", null],
                         },
                     },
                     "number": {
                         "type": {
-                            "type": ["number", {}],
+                            "type": ["number", null],
                         },
                     },
                     "string": {
                         "type": {
-                            "type": ["string", {}],
+                            "type": ["string", null],
                         },
                     },
                     "nothing": {
@@ -82,8 +82,8 @@ export function generateCode2<Annotation>(
                 "types": buildDictionary((add) => {
                     schema["component types"].forEach(() => false, (e, k) => {
                         function generateBuilderNode(
-                            node: api.Node<Annotation>,
-                            keyProperty: api.Property<Annotation> | null,
+                            node: api.Node<PAnnotation>,
+                            keyProperty: api.Property<PAnnotation> | null,
                         ): t.__type_B {
                             return {
                                 "type": ["group", {
@@ -94,7 +94,7 @@ export function generateCode2<Annotation>(
                                             }
                                             add(k, {
                                                 "type": {
-                                                    "occurence": ["optional", {}],
+                                                    "occurence": ["optional", null],
                                                     "type": ((): t.__type_type_TU_Builder => {
                                                         switch (e.type[0]) {
                                                             case "collection": {
@@ -139,11 +139,11 @@ export function generateCode2<Annotation>(
                                                                 const $ = e.type[1]
                                                                 switch ($.type[0]) {
                                                                     case "boolean":
-                                                                        return ["boolean", {}]
+                                                                        return ["boolean", null]
                                                                     case "number":
-                                                                        return ["number", {}]
+                                                                        return ["number", null]
                                                                     case "string":
-                                                                        return ["string", {}]
+                                                                        return ["string", null]
                                                                     default:
                                                                         return pl.au($.type[0])
                                                                 }

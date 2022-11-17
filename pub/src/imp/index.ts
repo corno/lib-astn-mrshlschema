@@ -1,7 +1,7 @@
 import { convertToASTNSchema, createCreateDeserializer, createCreateDeserializerWithSerializedError, generateCode2 } from "./schemaschema@0.1"
 import * as inf from "../interface"
 
-//export type CreateGenerateCode = <Annotation>() => inf.GenerateCode<Annotation>
+//export type CreateGenerateCode = <PAnnotation>() => inf.GenerateCode<PAnnotation>
 
 // type API = {
 //     createCreateDeserializer: inf.CreateCreateDeserializer

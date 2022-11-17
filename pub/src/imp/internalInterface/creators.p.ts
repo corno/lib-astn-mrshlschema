@@ -5,7 +5,7 @@ import * as aea from "astn-expect-api"
 import * as pla from "pareto-lang-api"
 import { DeserializeError } from "./types/DeserializeError"
 
-export type CreateCreateDeserializer = <Annotation>(
+export type CreateCreateDeserializer = <PAnnotation>(
     $i: {
         onError: (
             $: {
@@ -14,13 +14,13 @@ export type CreateCreateDeserializer = <Annotation>(
             }
         ) => void,
     },
-    x: pra.ResolveRegistry<Annotation>,
-    ec: aea.IExpectContext<Annotation>,
+    x: pra.ResolveRegistry<PAnnotation>,
+    ec: aea.IExpectContext<PAnnotation>,
 
-) => api.CreateDeserializer<Annotation>
+) => api.CreateDeserializer<PAnnotation>
 
 
-export type CreateCreateDeserializerWithSerializedError = <Annotation>(
+export type CreateCreateDeserializerWithSerializedError = <PAnnotation>(
     $i: {
         onError: (
             $: {
@@ -29,14 +29,14 @@ export type CreateCreateDeserializerWithSerializedError = <Annotation>(
             },
         ) => void,
     },
-    x: pra.ResolveRegistry<Annotation>,
-    ec: aea.IExpectContext<Annotation>,
+    x: pra.ResolveRegistry<PAnnotation>,
+    ec: aea.IExpectContext<PAnnotation>,
 
-) => api.CreateDeserializer<Annotation>
+) => api.CreateDeserializer<PAnnotation>
 
-export type CreateConvertToSASTNSchema = <Annotation>() => api.ConvertToASTNSchema<Annotation>
+export type CreateConvertToSASTNSchema = <PAnnotation>() => api.ConvertToASTNSchema<PAnnotation>
 
-export type GenerateCode<Annotation> = (
-    schema: api.Schema<Annotation>,
+export type GenerateCode<PAnnotation> = (
+    schema: api.Schema<PAnnotation>,
     callback: ($: pla.__root_B) => void,
 ) => void

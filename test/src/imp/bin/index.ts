@@ -19,29 +19,29 @@ const fsLib = pf.init()
 
 
 
-function createDummyValueHandler<Annotation>(): h.IValueHandler<Annotation> {
+function createDummyValueHandler<PAnnotation>(): h.IValueHandler<PAnnotation> {
 
-    function createDummyObjectHandler(): h.IObjectHandler<Annotation> {
+    function createDummyObjectHandler(): h.IObjectHandler<PAnnotation> {
         return {
             property: () => createDummyRequiredValueHandler(),
             anonymousProperty: () => createDummyValueHandler(),
             onEnd: () => { },
         }
     }
-    function createDummyArrayHandler(): h.IArrayHandler<Annotation> {
+    function createDummyArrayHandler(): h.IArrayHandler<PAnnotation> {
         return {
             element: () => createDummyValueHandler(),
             onEnd: () => { }
         }
     }
-    function createDummyRequiredValueHandler(): h.IRequiredValueHandler<Annotation> {
+    function createDummyRequiredValueHandler(): h.IRequiredValueHandler<PAnnotation> {
         return {
             missing: () => { },
             exists: createDummyValueHandler()
         }
 
     }
-    function createDummyTaggedUnionHandler(): h.ITaggedUnionHandler<Annotation> {
+    function createDummyTaggedUnionHandler(): h.ITaggedUnionHandler<PAnnotation> {
         return {
             option: () => createDummyRequiredValueHandler(),
             missingOption: () => createDummyRequiredValueHandler(),
@@ -76,9 +76,9 @@ type Value =
     | Object
 
 
-function createLoggingValueHandler<Annotation>(set: (value: Value) => void): h.IValueHandler<Annotation> {
+function createLoggingValueHandler<PAnnotation>(set: (value: Value) => void): h.IValueHandler<PAnnotation> {
 
-    function createLoggingObjectHandler(x: Object): h.IObjectHandler<Annotation> {
+    function createLoggingObjectHandler(x: Object): h.IObjectHandler<PAnnotation> {
         return {
             property: ($) => {
                 return createLoggingRequiredValueHandler((res) => {
@@ -96,7 +96,7 @@ function createLoggingValueHandler<Annotation>(set: (value: Value) => void): h.I
             },
         }
     }
-    function createLoggingArrayHandler(x: Array): h.IArrayHandler<Annotation> {
+    function createLoggingArrayHandler(x: Array): h.IArrayHandler<PAnnotation> {
         return {
             element: () => {
                 return createLoggingValueHandler((val) => {
@@ -106,7 +106,7 @@ function createLoggingValueHandler<Annotation>(set: (value: Value) => void): h.I
             onEnd: () => { }
         }
     }
-    function createLoggingTaggedUnionHandler(x: TaggedUnion): h.ITaggedUnionHandler<Annotation> {
+    function createLoggingTaggedUnionHandler(x: TaggedUnion): h.ITaggedUnionHandler<PAnnotation> {
         return {
             option: ($) => {
                 x[0] = $.token.token.value
@@ -148,7 +148,7 @@ function createLoggingValueHandler<Annotation>(set: (value: Value) => void): h.I
         }
     }
 }
-function createLoggingRequiredValueHandler<Annotation>(set: (value: Value | null) => void): h.IRequiredValueHandler<Annotation> {
+function createLoggingRequiredValueHandler<PAnnotation>(set: (value: Value | null) => void): h.IRequiredValueHandler<PAnnotation> {
     return {
         missing: () => {
             //throw new Error("@@@@")
@@ -210,8 +210,8 @@ pb.runProgram($ => {
             }
         )(
             {
-                duplicateEntrySeverity: ["warning", {}],
-                onDuplicateEntry: ["ignore", {}],
+                duplicateEntrySeverity: ["warning", null],
+                onDuplicateEntry: ["ignore", null],
             }
         )
 

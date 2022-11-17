@@ -2,7 +2,7 @@ import * as th from "astn-typedhandlers-api"
 import { Schema } from "./types/types"
 import * as pra from "pareto-resolve-lib"
 
-export type ConvertToASTNSchema<Annotation> = (
-    schema: Schema<Annotation>,
-    x: pra.ResolveRegistry<Annotation>,
+export type ConvertToASTNSchema<PAnnotation> = (
+    schema: Schema<PAnnotation>,
+    x: pra.ResolveRegistry<PAnnotation>,
 ) => th.Schema

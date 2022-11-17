@@ -5,11 +5,11 @@ import * as th from "astn-typedhandlers-api"
 import * as generic from "./generic"
 
 export type DiagnosticSeverity =
-    | ["error", {}]
+    | ["error", null]
 
-export function createRoot<Annotation>(
+export function createRoot<PAnnotation>(
     $: {
-        schema: api.Schema<Annotation>,
+        schema: api.Schema<PAnnotation>,
     },
     $i: {
         onError: (message: string, annotation: Annotation, severity: DiagnosticSeverity) => void
@@ -17,12 +17,12 @@ export function createRoot<Annotation>(
     $d: {
         isNaN: (value: string) => boolean
     }
-): th.ITypedValueHandler<Annotation> {
+): th.ITypedValueHandler<PAnnotation> {
 
     function createDictionary(
-        _definition: api.Dictionary<Annotation>,
-        collectionDefinition: api.Collection<Annotation>,
-    ): th.IDictionaryHandler<Annotation> {
+        _definition: api.Dictionary<PAnnotation>,
+        collectionDefinition: api.Collection<PAnnotation>,
+    ): th.IDictionaryHandler<PAnnotation> {
         return {
             onClose: () => {
                 //
@@ -35,8 +35,8 @@ export function createRoot<Annotation>(
 
     function createList(
         _definition: api.List,
-        collectionDefinition: api.Collection<Annotation>,
-    ): th.IListHandler<Annotation> {
+        collectionDefinition: api.Collection<PAnnotation>,
+    ): th.IListHandler<PAnnotation> {
         return {
             onElement: () => {
                 return createNode(collectionDefinition.node)
@@ -48,8 +48,8 @@ export function createRoot<Annotation>(
     }
 
     function createStateGroup(
-        definition: api.StateGroup<Annotation>,
-    ): th.ITypedTaggedUnionHandler<Annotation> {
+        definition: api.StateGroup<PAnnotation>,
+    ): th.ITypedTaggedUnionHandler<PAnnotation> {
         return {
             onUnexpectedOption: ($) => {
                 const state = generic.getUnsafeEntry(definition.states, $.defaultOption)
@@ -67,8 +67,8 @@ export function createRoot<Annotation>(
 
     function createProp(
         name: string,
-        nodedefinition: api.Node<Annotation>,
-    ): th.ITypedValueHandler<Annotation> {
+        nodedefinition: api.Node<PAnnotation>,
+    ): th.ITypedValueHandler<PAnnotation> {
         return {
             onDictionary: () => {
                 const prop = generic.getUnsafeEntry(nodedefinition.properties, name)
@@ -125,30 +125,30 @@ export function createRoot<Annotation>(
                     switch ($$.type[0]) {
                         case "boolean": {
                             if ($.token.token.wrapping[0] !== "none") {
-                                $i.onError(`expected a boolean, found a quoted string`, $.token.annotation, ["error", {}])
+                                $i.onError(`expected a boolean, found a quoted string`, $.token.annotation, ["error", null])
                             } else {
                                 const val = $.value
                                 if (val !== "true" && val !== "false") {
-                                    $i.onError(`value '${val}' is not a boolean`, $.token.annotation, ["error", {}])
+                                    $i.onError(`value '${val}' is not a boolean`, $.token.annotation, ["error", null])
                                 }
                             }
                             break
                         }
                         case "number": {
                             if ($.token.token.wrapping[0] !== "none") {
-                                $i.onError(`expected a number, found a wrapped string`, $.token.annotation, ["error", {}])
+                                $i.onError(`expected a number, found a wrapped string`, $.token.annotation, ["error", null])
                             } else {
                                 const val = $.value
                                 //eslint-disable-next-line no-new-wrappers
                                 if ($d.isNaN(val)) {
-                                    $i.onError(`value '${val}' is not a number`, $.token.annotation, ["error", {}])
+                                    $i.onError(`value '${val}' is not a number`, $.token.annotation, ["error", null])
                                 }
                             }
                             break
                         }
                         case "string": {
                             if ($.token.token.wrapping[0] === "none") {
-                                $i.onError(`expected a quoted string`, $.token.annotation, ["error", {}])
+                                $i.onError(`expected a quoted string`, $.token.annotation, ["error", null])
                             }
                             break
                         }
@@ -164,8 +164,8 @@ export function createRoot<Annotation>(
     }
 
     function createNode(
-        definition: api.Node<Annotation>,
-    ): th.ITypedValueHandler<Annotation> {
+        definition: api.Node<PAnnotation>,
+    ): th.ITypedValueHandler<PAnnotation> {
         return {
             onDictionary: () => {
                 pc.panic("unexpected")

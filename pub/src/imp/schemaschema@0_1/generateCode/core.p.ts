@@ -21,15 +21,15 @@ function buildDictionary<T>(
     return out
 }
 
-export function generateCore<Annotation>(
-    schema: api.Schema<Annotation>,
+export function generateCore<PAnnotation>(
+    schema: api.Schema<PAnnotation>,
 ): t.__namespaces_B {
     return {
         "types": buildDictionary((add) => {
             schema["component types"].forEach(() => false, (e, k) => {
                 function generateNode(
-                    node: api.Node<Annotation>,
-                    keyProperty: api.Property<Annotation> | null,
+                    node: api.Node<PAnnotation>,
+                    keyProperty: api.Property<PAnnotation> | null,
                 ): t.__type_B {
                     return {
                         "type": ["group", {
@@ -84,11 +84,11 @@ export function generateCore<Annotation>(
                                                         const $ = e.type[1]
                                                         switch ($.type[0]) {
                                                             case "boolean":
-                                                                return ["boolean", {}]
+                                                                return ["boolean", null]
                                                             case "number":
-                                                                return ["number", {}]
+                                                                return ["number", null]
                                                             case "string":
-                                                                return ["string", {}]
+                                                                return ["string", null]
                                                             default:
                                                                 return pl.au($.type[0])
                                                         }

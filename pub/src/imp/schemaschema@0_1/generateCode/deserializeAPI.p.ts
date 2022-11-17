@@ -27,7 +27,7 @@ export function generateDeserializeAPI(
                                                         "properties": {
                                                             "value": {
                                                                 "type": {
-                                                                    "type": ["string", {}],
+                                                                    "type": ["string", null],
                                                                 },
                                                             },
                                                         },
@@ -55,7 +55,7 @@ export function generateDeserializeAPI(
                         "properties": {
                             "message": {
                                 "type": {
-                                    "type": ["string", {}],
+                                    "type": ["string", null],
                                 },
                             },
                             "annotation": {

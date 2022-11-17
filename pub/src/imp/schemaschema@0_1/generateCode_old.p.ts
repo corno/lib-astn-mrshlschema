@@ -163,8 +163,8 @@ function createIdentifierGenerator(componentTypeName: string): NodeIdentifierGen
     return createNode([componentTypeName])
 }
 
-export function generateCode<Annotation>(
-    schema: api.Schema<Annotation>,
+export function generateCode<PAnnotation>(
+    schema: api.Schema<PAnnotation>,
     $w: ITempBlock,
 ): void {
     $w.fullLine(`/*eslint`)
@@ -187,34 +187,34 @@ export function generateCode<Annotation>(
     })
     $w.fullLine(`}`)
     /*
-    interface ValueHandler<Annotation> {
+    interface ValueHandler<PAnnotation> {
 
     }
 
-    interface RequiredValueHandler<Annotation> {
-        exists: ValueHandler<Annotation>
+    interface RequiredValueHandler<PAnnotation> {
+        exists: ValueHandler<PAnnotation>
         missing: () => void
     }
 
-    interface IExpectContext<Annotation> {
+    interface IExpectContext<PAnnotation> {
         expectList($: {
-            onElement: () => ValueHandler<Annotation>
-        }): ValueHandler<Annotation>
+            onElement: () => ValueHandler<PAnnotation>
+        }): ValueHandler<PAnnotation>
         expectVerboseGroup($: {
             properties: {
                 [key: string]: {
                     onNotExists: () => void
-                    onExists: () => RequiredValueHandler<Annotation>
+                    onExists: () => RequiredValueHandler<PAnnotation>
                 }
             }
             onEnd: () => void
 
-        }): ValueHandler<Annotation>
+        }): ValueHandler<PAnnotation>
         expectTaggedUnion($: {
             options: {
-                [key: string]: () => RequiredValueHandler<Annotation>
+                [key: string]: () => RequiredValueHandler<PAnnotation>
             }
-        }): ValueHandler<Annotation>
+        }): ValueHandler<PAnnotation>
         expectDictionary($: {
             onProperty: ($: {
                 data: {
@@ -222,14 +222,14 @@ export function generateCode<Annotation>(
                         value: string
                     }
                 }
-            }) => RequiredValueHandler<Annotation>
-        }): ValueHandler<Annotation>
+            }) => RequiredValueHandler<PAnnotation>
+        }): ValueHandler<PAnnotation>
         expectQuotedString($: {
             warningOnly: boolean
             callback: ($: {
                 value: string
-            }) => astn.IValueHandler<Annotation>
-        }): astn.IValueHandler<Annotation>
+            }) => astn.IValueHandler<PAnnotation>
+        }): astn.IValueHandler<PAnnotation>
     }
     */
     $w.fullLine(``)
@@ -263,8 +263,8 @@ export function generateCode<Annotation>(
 
     schema["component types"].forEach(() => false, ($, key) => {
         function generateNodeTypes(
-            node: api.Node<Annotation>,
-            keyProperty: api.Property<Annotation> | null,
+            node: api.Node<PAnnotation>,
+            keyProperty: api.Property<PAnnotation> | null,
             ig: NodeIdentifierGenerator,
         ) {
             //first generate for all nested nodes
@@ -376,8 +376,8 @@ export function generateCode<Annotation>(
     })
     schema["component types"].forEach(() => false, ($, key) => {
         function generateNodeBuilderTypes(
-            node: api.Node<Annotation>,
-            keyProperty: api.Property<Annotation> | null,
+            node: api.Node<PAnnotation>,
+            keyProperty: api.Property<PAnnotation> | null,
             ig: NodeIdentifierGenerator,
         ) {
             //first generate for all nested nodes
@@ -493,7 +493,7 @@ export function generateCode<Annotation>(
     //     $w.nestedBlockX($w => {
     //         $w.fullLine(`callback: (out: ${createIdentifierGenerator(key).generateNodeIdentifier()}) => void,`)
     //     })
-    //     $w.fullLine(`): Iastn.IValueHandler<Annotation> {`)
+    //     $w.fullLine(`): Iastn.IValueHandler<PAnnotation> {`)
     //     $w.nestedBlockX($w => {
     //         $w.line($w => {
     //             $w.snippet(`return `)
@@ -505,15 +505,15 @@ export function generateCode<Annotation>(
     //     $w.fullLine(``)
     // })
 
-    $w.fullLine(`export function createDeserializer<Annotation>(`)
+    $w.fullLine(`export function createDeserializer<PAnnotation>(`)
     $w.parameters(($w) => {
-        $w.fullLine(`context: astn.IExpectContext<Annotation>,`)
+        $w.fullLine(`context: astn.IExpectContext<PAnnotation>,`)
         $w.fullLine(`raiseValidationError: (message: string, annotation: Annotation) => void,`)
         $w.fullLine(`callback: (result: ${createIdentifierGenerator(schema["root type"].reference.name).generateNodeIdentifier()}) => void,`)
     })
-    $w.fullLine(`): astn.IRequiredValueHandler<Annotation> {`)
+    $w.fullLine(`): astn.IRequiredValueHandler<PAnnotation> {`)
     $w.statementsBlock(($w) => {
-        $w.fullLine(`function wrap(handler: astn.IValueHandler<Annotation>): astn.IRequiredValueHandler<Annotation> {`)
+        $w.fullLine(`function wrap(handler: astn.IValueHandler<PAnnotation>): astn.IRequiredValueHandler<PAnnotation> {`)
         $w.statementsBlock(($w) => {
             $w.fullLine(`return {`)
             $w.objectImp(($w) => {
@@ -533,12 +533,12 @@ export function generateCode<Annotation>(
             $w.parameters(($w) => {
                 $w.fullLine(`callback: (out: ${createIdentifierGenerator(key).generateNodeIdentifier()}) => void,`)
             })
-            $w.fullLine(`): astn.IValueHandler<Annotation> {`)
+            $w.fullLine(`): astn.IValueHandler<PAnnotation> {`)
             $w.statementsBlock(($w) => {
                 $w.line(($w) => {
                     function generateHandlerCodeForNode(
-                        node: api.Node<Annotation>,
-                        keyProperty: api.Property<Annotation> | null,
+                        node: api.Node<PAnnotation>,
+                        keyProperty: api.Property<PAnnotation> | null,
                         $w: ILine,
                         path: NodeIdentifierGenerator,
                     ) {
@@ -761,7 +761,7 @@ export function generateCode<Annotation>(
                                     $w.fullLine(`},`)
                                     $w.fullLine(`onEnd: () => {`)
                                     $w.statementsBlock(($w) => {
-                                        function createDefaultInitializer($: api.Node<Annotation>, $w: ILine) {
+                                        function createDefaultInitializer($: api.Node<PAnnotation>, $w: ILine) {
                                             $w.snippet(`{`)
                                             $w.tempBlock(($w) => {
                                                 $.properties.forEach(() => false, ($, key) => {
@@ -913,7 +913,7 @@ export function generateCode<Annotation>(
     })
     $w.fullLine(`}`)
     $w.fullLine(``)
-    $w.fullLine(`export function createBuilder<Annotation>(`)
+    $w.fullLine(`export function createBuilder<PAnnotation>(`)
     $w.parameters(($w) => {
         $w.fullLine(`intermediate: ${createIdentifierGenerator(schema["root type"].reference.name).generateNodeBuilderIdentifier()},`)
     })
@@ -921,8 +921,8 @@ export function generateCode<Annotation>(
     $w.statementsBlock(($w) => {
         schema["component types"].forEach(() => false, ($, key) => {
             function generateDefaultInitializationCodeForNode(
-                node: api.Node<Annotation>,
-                keyProperty: api.Property<Annotation> | null,
+                node: api.Node<PAnnotation>,
+                keyProperty: api.Property<PAnnotation> | null,
                 $w: ILine,
             ) {
 
@@ -995,8 +995,8 @@ export function generateCode<Annotation>(
             $w.statementsBlock(($w) => {
                 $w.line(($w) => {
                     function generateBuilderCodeForNode(
-                        node: api.Node<Annotation>,
-                        keyProperty: api.Property<Annotation> | null,
+                        node: api.Node<PAnnotation>,
+                        keyProperty: api.Property<PAnnotation> | null,
                         $w: ILine,
                         context: string,
                         path: NodeIdentifierGenerator,

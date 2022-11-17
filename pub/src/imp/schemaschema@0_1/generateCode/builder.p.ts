@@ -20,8 +20,8 @@ function buildDictionary<T>(
     return out
 }
 
-export function generateBuilder<Annotation>(
-    schema: api.Schema<Annotation>,
+export function generateBuilder<PAnnotation>(
+    schema: api.Schema<PAnnotation>,
 ): t.__function_implementations_B {
     return {
         "namespace reference": {
@@ -32,8 +32,8 @@ export function generateBuilder<Annotation>(
             "functions": buildDictionary((add) => {
                 schema["component types"].forEach(() => false, ($, key) => {
                     function generateTypeBuilder(
-                        $: api.Node<Annotation>,
-                        keyProperty: null | api.Property<Annotation>,
+                        $: api.Node<PAnnotation>,
+                        keyProperty: null | api.Property<PAnnotation>,
                     ): t.__type_expression_B {
                         return {
                             "strategy": ["literal", {
@@ -52,7 +52,7 @@ export function generateBuilder<Annotation>(
                                                                     return ["map", {
                                                                         "entry": generateTypeBuilder(
                                                                             $.node,
-                                                                            ((): null | api.Property<Annotation> => {
+                                                                            ((): null | api.Property<PAnnotation> => {
                                                                                 switch ($.type[0]) {
                                                                                     case "dictionary":
                                                                                         return pl.cc($.type[1], ($) => {
@@ -188,8 +188,8 @@ export function generateBuilder<Annotation>(
                         }
                     }
                     function generateDefaultTypeBuilder(
-                        $: api.Node<Annotation>,
-                        keyProperty: null | api.Property<Annotation>,
+                        $: api.Node<PAnnotation>,
+                        keyProperty: null | api.Property<PAnnotation>,
                     ): t.__type_expression_B {
                         return {
                             "strategy": ["literal", {
@@ -209,13 +209,13 @@ export function generateBuilder<Annotation>(
                                                                         case "dictionary":
                                                                             return pl.cc($.type[1], ($) => {
                                                                                 return ["literal", {
-                                                                                    "type": ["dictionary", {}],
+                                                                                    "type": ["dictionary", null],
                                                                                 }]
                                                                             })
                                                                         case "list":
                                                                             return pl.cc($.type[1], ($) => {
                                                                                 return ["literal", {
-                                                                                    "type": ["list", {}],
+                                                                                    "type": ["list", null],
                                                                                 }]
                                                                             })
                                                                         default:

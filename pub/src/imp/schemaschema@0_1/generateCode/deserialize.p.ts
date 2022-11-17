@@ -20,8 +20,8 @@ function buildDictionary<T>(
     return out
 }
 
-export function generateDeserializeNamespace<Annotation>(
-    schema: api.Schema<Annotation>,
+export function generateDeserializeNamespace<PAnnotation>(
+    schema: api.Schema<PAnnotation>,
 ): t.__namespaces_B {
     return {
         "type parameters": {

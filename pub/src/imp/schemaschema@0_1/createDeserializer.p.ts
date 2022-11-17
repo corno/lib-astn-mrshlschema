@@ -22,7 +22,7 @@ function assertNotNull<T>(value: T | null): T {
     throw err
 }
 
-export function createDeserializer<Annotation>(
+export function createDeserializer<PAnnotation>(
     $i: {
         onError: (
             $: {
@@ -31,16 +31,16 @@ export function createDeserializer<Annotation>(
             }
         ) => void,
         onDone: (
-            metaData: null | api.Schema<Annotation>
+            metaData: null | api.Schema<PAnnotation>
         ) => void,
     },
-    x: pra.ResolveRegistry<Annotation>,
-    ec: aea.IExpectContext<Annotation>,
-): h.IRequiredValueHandler<Annotation> {
+    x: pra.ResolveRegistry<PAnnotation>,
+    ec: aea.IExpectContext<PAnnotation>,
+): h.IRequiredValueHandler<PAnnotation> {
 
     function createReference<T>(
         propertyName: string,
-        annotatedName: pra.AnnotatedString<Annotation> | null,
+        annotatedName: pra.AnnotatedString<PAnnotation> | null,
         defaultName: string,
         contextAnnotation: Annotation,
         lookup: pc.Lookup<T>,
@@ -56,13 +56,13 @@ export function createDeserializer<Annotation>(
             )
         }
     }
-    const componentTypes = pc.createDictionaryBuilder<api.ComponentType<Annotation>>()
-    let rootName: pra.AnnotatedString<Annotation> | null = null
+    const componentTypes = pc.createDictionaryBuilder<api.ComponentType<PAnnotation>>()
+    let rootName: pra.AnnotatedString<PAnnotation> | null = null
 
     function wrap(
-        handler: h.IValueHandler<Annotation>,
+        handler: h.IValueHandler<PAnnotation>,
         contextAnnotation: Annotation,
-    ): h.IRequiredValueHandler<Annotation> {
+    ): h.IRequiredValueHandler<PAnnotation> {
         return {
             exists: handler,
             missing: () => {
@@ -76,15 +76,15 @@ export function createDeserializer<Annotation>(
     }
 
     function createNodeDeserialiser(
-        context: aea.IExpectContext<Annotation>,
-        componentTypes: pc.Lookup<api.ComponentType<Annotation>>,
-        callback: (node: api.Node<Annotation>) => void,
-    ): aea.ExpectedProperty<Annotation> {
+        context: aea.IExpectContext<PAnnotation>,
+        componentTypes: pc.Lookup<api.ComponentType<PAnnotation>>,
+        callback: (node: api.Node<PAnnotation>) => void,
+    ): aea.ExpectedProperty<PAnnotation> {
 
 
         return {
             onExists: ($) => {
-                const properties = pc.createDictionaryBuilder<api.Property<Annotation>>()
+                const properties = pc.createDictionaryBuilder<api.Property<PAnnotation>>()
                 return wrap(
                     context.expectVerboseGroup({
                         properties: {
@@ -92,7 +92,7 @@ export function createDeserializer<Annotation>(
                                 onExists: ($) => wrap(
                                     context.expectDictionary({
                                         onProperty: (propertyData) => {
-                                            let targetPropertyType: api.PropertyType<Annotation> | null = null
+                                            let targetPropertyType: api.PropertyType<PAnnotation> | null = null
                                             return wrap(
                                                 context.expectVerboseGroup({
                                                     properties: {
@@ -101,8 +101,8 @@ export function createDeserializer<Annotation>(
                                                                 context.expectTaggedUnion({
                                                                     options: {
                                                                         "collection": ($) => {
-                                                                            let targetCollectionType: api.CollectionType<Annotation> | null = null
-                                                                            let targetNode: api.Node<Annotation> | null = null
+                                                                            let targetCollectionType: api.CollectionType<PAnnotation> | null = null
+                                                                            let targetNode: api.Node<PAnnotation> | null = null
 
                                                                             return wrap(
                                                                                 context.expectVerboseGroup({
@@ -119,7 +119,7 @@ export function createDeserializer<Annotation>(
                                                                                                 context.expectTaggedUnion({
                                                                                                     options: {
                                                                                                         "dictionary": ($) => {
-                                                                                                            let targetKeyProperty: pra.AnnotatedString<Annotation> | null = null
+                                                                                                            let targetKeyProperty: pra.AnnotatedString<PAnnotation> | null = null
                                                                                                             return wrap(
                                                                                                                 context.expectVerboseGroup({
                                                                                                                     properties: {
@@ -177,7 +177,7 @@ export function createDeserializer<Annotation>(
                                                                                                 $.token.annotation,
                                                                                             ),
                                                                                             onNotExists: () => {
-                                                                                                targetCollectionType = ["list", {}]
+                                                                                                targetCollectionType = ["list", null]
                                                                                             },
                                                                                         },
                                                                                     },
@@ -194,7 +194,7 @@ export function createDeserializer<Annotation>(
                                                                             )
                                                                         },
                                                                         "component": ($) => {
-                                                                            let targetComponentTypeName: pra.AnnotatedString<Annotation> | null = null
+                                                                            let targetComponentTypeName: pra.AnnotatedString<PAnnotation> | null = null
                                                                             return wrap(
                                                                                 context.expectVerboseGroup({
                                                                                     properties: {
@@ -236,8 +236,8 @@ export function createDeserializer<Annotation>(
                                                                             )
                                                                         },
                                                                         "state group": ($) => {
-                                                                            const states = pc.createDictionaryBuilder<api.State<Annotation>>()
-                                                                            let targetDefaultState: null | pra.AnnotatedString<Annotation> = null
+                                                                            const states = pc.createDictionaryBuilder<api.State<PAnnotation>>()
+                                                                            let targetDefaultState: null | pra.AnnotatedString<PAnnotation> = null
                                                                             return wrap(
                                                                                 context.expectVerboseGroup({
                                                                                     properties: {
@@ -245,7 +245,7 @@ export function createDeserializer<Annotation>(
                                                                                             onExists: ($) => wrap(
                                                                                                 context.expectDictionary({
                                                                                                     onProperty: (stateData) => {
-                                                                                                        let targetNode: api.Node<Annotation> | null = null
+                                                                                                        let targetNode: api.Node<PAnnotation> | null = null
                                                                                                         return wrap(
                                                                                                             context.expectVerboseGroup({
                                                                                                                 properties: {
@@ -325,7 +325,7 @@ export function createDeserializer<Annotation>(
                                                                                                 context.expectTaggedUnion({
                                                                                                     options: {
                                                                                                         "number": ($) => {
-                                                                                                            targetValueType = ["number", {}]
+                                                                                                            targetValueType = ["number", null]
                                                                                                             return wrap(
                                                                                                                 context.expectVerboseGroup({}),
                                                                                                                 $.annotation
@@ -333,7 +333,7 @@ export function createDeserializer<Annotation>(
                                                                                                             )
                                                                                                         },
                                                                                                         "text": ($) => {
-                                                                                                            targetValueType = ["string", {}]
+                                                                                                            targetValueType = ["string", null]
                                                                                                             return wrap(
                                                                                                                 context.expectVerboseGroup({}),
                                                                                                                 $.annotation,
@@ -344,7 +344,7 @@ export function createDeserializer<Annotation>(
                                                                                                 $.token.annotation,
                                                                                             ),
                                                                                             onNotExists: () => {
-                                                                                                targetValueType = ["string", {}]
+                                                                                                targetValueType = ["string", null]
                                                                                             },
                                                                                         },
                                                                                         "default value": {
@@ -381,7 +381,7 @@ export function createDeserializer<Annotation>(
                                                             onNotExists: () => {
                                                                 targetPropertyType = ["value", {
                                                                     "default value": "",
-                                                                    "type": ["string", {}],
+                                                                    "type": ["string", null],
                                                                 }]
                                                             },
                                                         },
@@ -413,7 +413,7 @@ export function createDeserializer<Annotation>(
             },
             onNotExists: () => {
                 callback({
-                    properties: pc.createDictionaryBuilder<api.Property<Annotation>>().toDictionary(),
+                    properties: pc.createDictionaryBuilder<api.Property<PAnnotation>>().toDictionary(),
                 })
             },
         }
@@ -430,7 +430,7 @@ export function createDeserializer<Annotation>(
                             },
                             onProperty: (propertyData) => {
                                 //pl.logDebugMessage(`!!!>>>> ${propertyData.token.token.value}`)
-                                let targetNode: api.Node<Annotation> | null = null
+                                let targetNode: api.Node<PAnnotation> | null = null
                                 return wrap(
                                     ec.expectVerboseGroup({
                                         properties: {
@@ -480,7 +480,7 @@ export function createDeserializer<Annotation>(
                 },
             },
             onEnd: ($) => {
-                let targetSchema: api.Schema<Annotation> | null = null
+                let targetSchema: api.Schema<PAnnotation> | null = null
 
                 const assertedRootName = assertNotNull(rootName)
                 targetSchema = {
@@ -512,7 +512,7 @@ export function createDeserializer<Annotation>(
     }
 }
 
-export function createCreateDeserializerWithSerializedError<Annotation>(
+export function createCreateDeserializerWithSerializedError<PAnnotation>(
     $x: {
         onError: (
             $: {
@@ -521,9 +521,9 @@ export function createCreateDeserializerWithSerializedError<Annotation>(
             },
         ) => void
     },
-    x: pra.ResolveRegistry<Annotation>,
-    ec: aea.IExpectContext<Annotation>,
-): api.CreateDeserializer<Annotation> {
+    x: pra.ResolveRegistry<PAnnotation>,
+    ec: aea.IExpectContext<PAnnotation>,
+): api.CreateDeserializer<PAnnotation> {
     return createCreateDeserializer(
         {
             onError: ($) => {
@@ -540,7 +540,7 @@ export function createCreateDeserializerWithSerializedError<Annotation>(
 
 
 
-export function createCreateDeserializer<Annotation>(
+export function createCreateDeserializer<PAnnotation>(
     $x: {
         onError: (
             $: {
@@ -549,9 +549,9 @@ export function createCreateDeserializer<Annotation>(
             }
         ) => void
     },
-    x: pra.ResolveRegistry<Annotation>,
-    ec: aea.IExpectContext<Annotation>,
-): api.CreateDeserializer<Annotation> {
+    x: pra.ResolveRegistry<PAnnotation>,
+    ec: aea.IExpectContext<PAnnotation>,
+): api.CreateDeserializer<PAnnotation> {
     return ($i) => {
         return createDeserializer(
             {

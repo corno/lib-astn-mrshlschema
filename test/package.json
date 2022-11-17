@@ -7,7 +7,6 @@
     "astn-typedtreehandler-lib": "^0.14.0",
     "lib-astn-unmarshall": "^0.0.0",
     "lib-fountain-pen": "^0.0.0",
-    "pareto-core-async": "^0.26.0",
     "pareto-core-exe": "^0.3.0",
     "res-pareto-filesystem": "^0.0.0",
     "lib-pareto-lang": "^0.0.0",

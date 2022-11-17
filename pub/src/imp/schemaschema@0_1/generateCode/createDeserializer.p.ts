@@ -11,8 +11,8 @@ import * as api from "../../../interface"
 import * as t from "pareto-lang-lib"
 
 
-export function generateCreateDeserializer<Annotation>(
-    schema: api.Schema<Annotation>,
+export function generateCreateDeserializer<PAnnotation>(
+    schema: api.Schema<PAnnotation>,
 ): t.__procedure_implementations_B {
     return {
         "type parameters": {
@@ -128,7 +128,7 @@ export function generateCreateDeserializer<Annotation>(
                                     switch ($.type[0]) {
                                         case "dictionary":
                                             return pl.cc($.type[1], ($): t.__type_steps_TU_Builder => {
-                                                return ["dictionary", {}]
+                                                return ["dictionary", null]
                                             })
                                         case "group":
                                             return pl.cc($.type[1], ($) => {
@@ -138,7 +138,7 @@ export function generateCreateDeserializer<Annotation>(
                                             })
                                         case "list":
                                             return pl.cc($.type[1], ($) => {
-                                                return ["list", {}]
+                                                return ["list", null]
                                             })
                                         case "tagged union option":
                                             return pl.cc($.type[1], ($) => {
@@ -154,8 +154,8 @@ export function generateCreateDeserializer<Annotation>(
                         })
                     }
                     function generateNodeDeserializer(
-                        $: api.Node<Annotation>,
-                        keyProperty: api.Property<Annotation> | null,
+                        $: api.Node<PAnnotation>,
+                        keyProperty: api.Property<PAnnotation> | null,
                         typePath: pt.Array<Step>,
                     ): t.__internal_procedure_specification_B {
                         return {
@@ -197,8 +197,8 @@ export function generateCreateDeserializer<Annotation>(
                                     $.properties.forEach(() => false, ($, k) => {
                                         const newPath = concat<Step>(typePath, { "type": ["group", { "property": k }] })
                                         function generateInitializer(
-                                            $: api.Node<Annotation>,
-                                            keyProperty: api.Property<Annotation> | null,
+                                            $: api.Node<PAnnotation>,
+                                            keyProperty: api.Property<PAnnotation> | null,
                                         ): t.__type_expression_B {
                                             return {
                                                 "strategy": ["literal", {
@@ -557,7 +557,7 @@ export function generateCreateDeserializer<Annotation>(
                                                                                                                                                                                                                                                                         concat<Step>(
                                                                                                                                                                                                                                                                             newPath,
                                                                                                                                                                                                                                                                             {
-                                                                                                                                                                                                                                                                                "type": ["dictionary", {}],
+                                                                                                                                                                                                                                                                                "type": ["dictionary", null],
                                                                                                                                                                                                                                                                             },
                                                                                                                                                                                                                                                                         ),
                                                                                                                                                                                                                                                                     ),
@@ -637,7 +637,7 @@ export function generateCreateDeserializer<Annotation>(
                                                                                                                                                                                                                             concat(
                                                                                                                                                                                                                                 newPath,
                                                                                                                                                                                                                                 {
-                                                                                                                                                                                                                                    "type": ["list", {}],
+                                                                                                                                                                                                                                    "type": ["list", null],
                                                                                                                                                                                                                                 },
                                                                                                                                                                                                                             ),
                                                                                                                                                                                                                         ),
@@ -734,7 +734,7 @@ export function generateCreateDeserializer<Annotation>(
                                                                                                                                                                                                                                                                                                                                     "strategy": ["copy", {
                                                                                                                                                                                                                                                                                                                                         "context": {
                                                                                                                                                                                                                                                                                                                                             "start": {
-                                                                                                                                                                                                                                                                                                                                                "start": ["context", {}],
+                                                                                                                                                                                                                                                                                                                                                "start": ["context", null],
                                                                                                                                                                                                                                                                                                                                             },
                                                                                                                                                                                                                                                                                                                                         },
                                                                                                                                                                                                                                                                                                                                     }],

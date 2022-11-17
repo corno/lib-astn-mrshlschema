@@ -2,10 +2,10 @@
 import * as h from "astn-handlers-api"
 import { Schema } from "./types/types"
 
-export type CreateDeserializer<Annotation> = (
+export type CreateDeserializer<PAnnotation> = (
     $i: {
         onDone: (
-            metaData: null | Schema<Annotation>
+            metaData: null | Schema<PAnnotation>
         ) => void,
     },
-) => h.IRequiredValueHandler<Annotation>
+) => h.IRequiredValueHandler<PAnnotation>

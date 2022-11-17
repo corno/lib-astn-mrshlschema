@@ -1,11 +1,11 @@
 import * as h from "astn-handlers-api"
 import { ITypingHandler } from "./TypingHandler"
 
-export type ITypingHandlerBuilder<Annotation> = ($i: {
+export type ITypingHandlerBuilder<PAnnotation> = ($i: {
     onDone: ($i: {
-        handler: ITypingHandler<Annotation> | null
+        handler: ITypingHandler<PAnnotation> | null
     }) => void
-}) => h.IRequiredValueHandler<Annotation>
+}) => h.IRequiredValueHandler<PAnnotation>
 
 
 

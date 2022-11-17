@@ -3,7 +3,7 @@ import * as th from "astn-typedhandlers-api"
 import { SchemaCacheUnmarshallError } from "../types/SchemaCacheUnmarshallError"
 
 
-export type CreateUnmarshaller2<Annotation> = (
+export type CreateUnmarshaller2<PAnnotation> = (
     $: {
         schemaID: string
     },
@@ -11,9 +11,9 @@ export type CreateUnmarshaller2<Annotation> = (
         onError: ($: SchemaCacheUnmarshallError) => void
         onDone: () => void,
     },
-    downstreamHander: th.ITypedValueHandler<Annotation>
-) => tc.IContentTokenConsumer<Annotation>
+    downstreamHander: th.ITypedValueHandler<PAnnotation>
+) => tc.IContentTokenConsumer<PAnnotation>
 
-export type IExternalSchemaCache<Annotation> = {
-    createUnmarshaller: CreateUnmarshaller2<Annotation>,
+export type IExternalSchemaCache<PAnnotation> = {
+    createUnmarshaller: CreateUnmarshaller2<PAnnotation>,
 }
