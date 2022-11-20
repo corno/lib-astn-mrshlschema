@@ -1,8 +1,8 @@
 import * as pt from "pareto-core-types"
 
-export type AnnotatedReference<T, Annotation> = {
-    reference: pt.Reference<T>
-    annotation: Annotation
+export type AnnotatedReference<T, PAnnotation> = {
+    reference: null// pt.Reference<T>
+    annotation: PAnnotation
 }
 
 export type RawObject<T> = { [key: string]: T }
@@ -17,7 +17,7 @@ export type Collection<PAnnotation> = {
 }
 
 export type Component<PAnnotation> = {
-    readonly "type": AnnotatedReference<ComponentType<PAnnotation>, Annotation>
+    readonly "type": AnnotatedReference<ComponentType<PAnnotation>, PAnnotation>
 }
 
 export type ComponentType<PAnnotation> = {
@@ -25,7 +25,7 @@ export type ComponentType<PAnnotation> = {
 }
 
 export type Dictionary<PAnnotation> = {
-    readonly "key property": AnnotatedReference<Property<PAnnotation>, Annotation>
+    readonly "key property": AnnotatedReference<Property<PAnnotation>, PAnnotation>
 }
 
 export type List = {
@@ -47,7 +47,7 @@ export type PropertyType<PAnnotation> =
 
 export type Schema<PAnnotation> = {
     readonly "component types": pt.Dictionary<ComponentType<PAnnotation>>
-    readonly "root type": AnnotatedReference<ComponentType<PAnnotation>, Annotation>
+    readonly "root type": AnnotatedReference<ComponentType<PAnnotation>, PAnnotation>
 }
 
 export type State<PAnnotation> = {
@@ -56,7 +56,7 @@ export type State<PAnnotation> = {
 
 export type StateGroup<PAnnotation> = {
     readonly "states": pt.Dictionary<State<PAnnotation>>
-    readonly "default state": AnnotatedReference<State<PAnnotation>, Annotation>
+    readonly "default state": AnnotatedReference<State<PAnnotation>, PAnnotation>
 }
 
 export type ValueType =
