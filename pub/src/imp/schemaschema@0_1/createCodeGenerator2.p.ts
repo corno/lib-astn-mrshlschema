@@ -1,5 +1,5 @@
 // //import * as astn from "astn"
-// import * as pl from "pareto-core-lib"
+// import * as pl from 'pareto-core-lib'
 
 // import { createSchemaStreamProcesser } from "./createSchemaStreamProcessor"
 // import * as ll from "pareto-lang-lib"

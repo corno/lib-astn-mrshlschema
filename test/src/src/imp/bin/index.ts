@@ -1,5 +1,5 @@
-import * as pl from "pareto-core-lib"
-import * as pb from "pareto-core-exe"
+import * as pl from 'pareto-core-lib'
+import * as pb from 'pareto-core-exe'
 pl.logDebugMessage("no tests yet")
 
 import * as lib from "../../../../lib"

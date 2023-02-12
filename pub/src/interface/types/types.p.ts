@@ -1,4 +1,4 @@
-import * as pt from "pareto-core-types"
+import * as pt from 'pareto-core-types'
 
 export type AnnotatedReference<T, PAnnotation> = {
     reference: null// pt.Reference<T>

@@ -1,4 +1,4 @@
-// import * as pl from "pareto-core-lib"
+// import * as pl from 'pareto-core-lib'
 // import * as inf from "../../interface"
 
 // export function createDeserializerErrorMessage($: inf.DeserializeError): string {

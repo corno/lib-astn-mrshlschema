@@ -1,4 +1,4 @@
-// import * as pl from "pareto-core-lib"
+// import * as pl from 'pareto-core-lib'
 
 // import { CreateStreamConsumer } from "../../../../CreateStreamConsumer"
 // import { createSchemaStreamProcesser } from "./createSchemaStreamProcessor"

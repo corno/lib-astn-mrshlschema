@@ -1,4 +1,4 @@
-import * as pt from "pareto-core-types"
+import * as pt from 'pareto-core-types'
 
 // import * as th from "astn-typedhandlers-api"
 // import { Schema } from "./types/types"

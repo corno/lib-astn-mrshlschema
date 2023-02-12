@@ -2,7 +2,7 @@
 //     "max-len": "off",
 // */
 // import * as api from "../../interface"
-// import * as pl from "pareto-core-lib"
+// import * as pl from 'pareto-core-lib'
 
 // function generateIdentifier(str: string) {
 //     return str.replace(/ /g, "_").replace(/\-/g, "_")

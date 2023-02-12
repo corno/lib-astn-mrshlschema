@@ -1,6 +1,6 @@
 // import * as astn from "astn-typedhandlers-api"
-// import * as pt from "pareto-core-types"
-// import * as pl from "pareto-core-lib"
+// import * as pt from 'pareto-core-types'
+// import * as pl from 'pareto-core-lib'
 // import * as api from "../../interface"
 // import * as pra from "pareto-resolve-lib"
 

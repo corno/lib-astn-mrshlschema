@@ -3,8 +3,8 @@
 //     "max-len": "off",
 //     "@typescript-eslint/no-unused-vars": "off",
 // */
-// import * as pl from "pareto-core-lib"
-// import * as pt from "pareto-core-types"
+// import * as pl from 'pareto-core-lib'
+// import * as pt from 'pareto-core-types'
 // import * as pc from "pareto-core-candidates"
 
 // import * as api from "../../../interface"

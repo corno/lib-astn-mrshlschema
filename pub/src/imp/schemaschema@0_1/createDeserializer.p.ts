@@ -1,5 +1,5 @@
-// import * as pl from "pareto-core-lib"
-// import * as pa from "pareto-core-types"
+// import * as pl from 'pareto-core-lib'
+// import * as pa from 'pareto-core-types'
 // import * as aea from "astn-expect-api"
 // import * as pc from "pareto-core-candidates"
 

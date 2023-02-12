@@ -5,7 +5,7 @@
 // */
 // import * as api from "../../../interface"
 // import * as t from "pareto-lang-api"
-// import * as pl from "pareto-core-lib"
+// import * as pl from 'pareto-core-lib'
 
 // function buildDictionary<T>(
 //     builder: (
