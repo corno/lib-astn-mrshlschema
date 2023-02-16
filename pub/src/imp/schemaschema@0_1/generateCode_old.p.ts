@@ -1,6 +1,4 @@
-// /* eslint
-//     "max-len": "off",
-// */
+
 // import * as api from "../../interface"
 // import * as pl from 'pareto-core-lib'
 
@@ -167,17 +165,6 @@
 //     schema: api.Schema<PAnnotation>,
 //     $w: ITempBlock,
 // ): void {
-//     $w.fullLine(`/*eslint`)
-//     $w.indent(($w) => {
-//         $w.fullLine(`"@typescript-eslint/no-unused-vars": 0,`)
-//         $w.fullLine(`"camelcase": 0,`)
-//         $w.fullLine(`"dot-notation": 0,`)
-//         $w.fullLine(`"no-underscore-dangle": 0,`)
-//         $w.fullLine(`"quote-props": 0,`)
-//         $w.fullLine(`"max-len": 0`)
-//     })
-//     $w.fullLine(`*/`)
-
 //     $w.fullLine(`import * as pr from "pareto-runtime"`)
 //     $w.fullLine(`import * as astn from "astn"`)
 

@@ -1,7 +1,3 @@
-// /* eslint
-//     "@typescript-eslint/no-unused-vars": "off",
-// */
-
 // import * as api from "../../../interface"
 // import * as pl from 'pareto-core-lib'
 // import * as t from "pareto-lang-api"

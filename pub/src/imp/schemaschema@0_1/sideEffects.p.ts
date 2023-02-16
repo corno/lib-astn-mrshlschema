@@ -139,7 +139,6 @@
 //                                 $i.onError(`expected a number, found a wrapped string`, $.token.annotation, ["error", null])
 //                             } else {
 //                                 const val = $.value
-//                                 //eslint-disable-next-line no-new-wrappers
 //                                 if ($d.isNaN(val)) {
 //                                     $i.onError(`value '${val}' is not a number`, $.token.annotation, ["error", null])
 //                                 }

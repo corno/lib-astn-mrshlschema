@@ -1,8 +1,3 @@
-// /* eslint
-//     "camelcase": "off",
-//     "max-len": "off",
-//     "@typescript-eslint/no-unused-vars": "off",
-// */
 // import * as t from "pareto-lang-api"
 
 // export function generateDeserializeAPI(
