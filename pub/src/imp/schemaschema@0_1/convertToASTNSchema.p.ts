@@ -13,7 +13,7 @@
 //         node: api.Node<PAnnotation>, componentTypes: pt.Lookup<astn.TypeDefinition>,
 //         keyProperty: null | api.Property<PAnnotation>,
 //     ): astn.ValueDefinition {
-//         const properties = pl.createDictionaryBuilder<astn.PropertyDefinition>()
+//         const properties = pl.createDictionaryBuilderFIXME<astn.PropertyDefinition>()
 //         node.properties.forEach(() => false, (prop, key) => {
 //             if (prop === keyProperty) {
 //                 return
@@ -83,7 +83,7 @@
 //                             }
 //                             case "state group": {
 //                                 const $ = prop.type[1]
-//                                 const states = pl.createDictionaryBuilder<astn.OptionDefinition>()
+//                                 const states = pl.createDictionaryBuilderFIXME<astn.OptionDefinition>()
 
 //                                 $.states.forEach(() => false, (state, key) => {
 //                                     states.add(key, {
@@ -137,7 +137,7 @@
 //         }
 //     }
 
-//     const types = pl.createDictionaryBuilder<astn.TypeDefinition>()
+//     const types = pl.createDictionaryBuilderFIXME<astn.TypeDefinition>()
 //     schema["component types"].forEach(() => false, (ct, key) => {
 //         const ctName = key
 //         types.add(ctName, {
